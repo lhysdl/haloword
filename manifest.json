@@ -35,7 +35,9 @@
     "unlimitedStorage",
     "storage",
     "contextMenus",
-    "tabs"
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
   ],
   "web_accessible_resources": [
     "img/icon.svg",

@@ -101,28 +101,28 @@ $("#haloword-pron").click(function() {
     audio.play();
 });
 
-function pron_exist(word, is_upper) {
-    /* URL: http://www.gstatic.com/dictionary/static/sounds/oxford/iridium--_us_1.mp3 */
-    var pron_url = (window.location.protocol === "https:" ? "https://ssl" : "http://www") + ".gstatic.com/dictionary/static/sounds/oxford/" + word + "--_us_1.mp3";
-    if (is_english(word) || is_upper) {
-        $.ajax({
-            url: pron_url,
-            timeout: 3000,
-            success: function() {
-                var current_word = $("#haloword-word").html().toLowerCase();
-                if (word == current_word || word.substring(1).toLowerCase() == current_word) {
-                    $("#haloword-audio").attr("src", pron_url);
-                    $("#haloword-pron").show();
-                }
-            },
-            error: function(xhr, d, e) {
-                if (!is_upper) {
-                    pron_exist('!' + word[0].toUpperCase() + word.substring(1), true);
-                }
-            }
-        });
-    }
-}
+// function pron_exist(word, is_upper) {
+//     /* URL: http://www.gstatic.com/dictionary/static/sounds/oxford/iridium--_us_1.mp3 */
+//     var pron_url = (window.location.protocol === "https:" ? "https://ssl" : "http://www") + ".gstatic.com/dictionary/static/sounds/oxford/" + word + "--_us_1.mp3";
+//     if (is_english(word) || is_upper) {
+//         $.ajax({
+//             url: pron_url,
+//             timeout: 3000,
+//             success: function() {
+//                 var current_word = $("#haloword-word").html().toLowerCase();
+//                 if (word == current_word || word.substring(1).toLowerCase() == current_word) {
+//                     $("#haloword-audio").attr("src", pron_url);
+//                     $("#haloword-pron").show();
+//                 }
+//             },
+//             error: function(xhr, d, e) {
+//                 if (!is_upper) {
+//                     pron_exist('!' + word[0].toUpperCase() + word.substring(1), true);
+//                 }
+//             }
+//         });
+//     }
+// }
 
 function get_selection() {
     var selection = $.trim(window.getSelection());
@@ -212,8 +212,9 @@ function event_mouseup(e) {
                             }
 
                             $("#haloword-content").html(def);
-
-                            pron_exist(selection.toLowerCase(), false);
+                            $("#haloword-audio").attr("src", pron_url + selection.toLowerCase());
+                            $("#haloword-pron").show();
+                            //pron_exist(selection.toLowerCase(), false);
                         }
                         else if (data.translation) {
                             for (i in data.translation) {
